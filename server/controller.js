@@ -15,7 +15,7 @@ module.exports = {
         let newMovie = {
             id: globalID,
             title,
-            rating,
+            rating: +rating,
             imageURL
         }
         movies.push(newMovie);
@@ -27,14 +27,14 @@ module.exports = {
         const {type} = req.body;
         let index = movies.findIndex(elem => +elem.id === +id);
         console.log(type);
-        if(type === 'minus' && movies[index].rating > 0){
+        if(type === 'minus' && movies[index].rating > 1){
             movies[index].rating -= 1;
             res.status(200).send(movies);
         } else if(type === 'plus' && movies[index].rating < 5){
             movies[index].rating += 1;
             res.status(200).send(movies);
         } else {
-            res.status(400).send('Something went wrong...')
+            res.status(400).send('Invalid star rating!')
         }
     }
 }
