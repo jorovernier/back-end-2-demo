@@ -17,4 +17,4 @@ app.put('/api/movies/:id', updateMovie);
 
 // -----------------------------------------
 
-app.listen(4004, () => {console.log('Listening on port 4004')})
+app.listen(4004, () => {console.log('Ready to rock n roll on port 4004!')})
