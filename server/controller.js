@@ -5,6 +5,11 @@ module.exports = {
     getMovies: (req, res) => {
         res.status(200).send(movies)
     },
+    deleteMovie: (req, res) => {
+        let index = movies.findIndex(elem => elem.id === +req.params.id);
+        movies.splice(index, 1);
+        res.status(200).send(movies);
+    },
     createMovie: (req, res) => {
         const {title, rating, imageURL} = req.body;
 
@@ -18,7 +23,7 @@ module.exports = {
 
         let newMovie = {
             id: globalID,
-            title,
+            title: title,
             rating: +rating,
             imageURL
         }
@@ -26,16 +31,9 @@ module.exports = {
         globalID++;
         res.status(200).send(movies);
     },
-    deleteMovie: (req, res) => {
-        let index = movies.findIndex(elem => elem.id === +req.params.id);
-        movies.splice(index, 1);
-        res.status(200).send(movies);
-    },
     updateMovie: (req, res) => {
-        const {id} = req.params;
         const {type} = req.body;
-        let index = movies.findIndex(elem => +elem.id === +id);
-        console.log(type);
+        let index = movies.findIndex(elem => +elem.id === +req.params.id);
         if(type === 'minus' && movies[index].rating > 1){
             movies[index].rating -= 1;
             res.status(200).send(movies);
