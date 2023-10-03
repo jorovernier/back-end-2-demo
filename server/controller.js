@@ -1,4 +1,4 @@
-let movies = require('./db.json');
+const movies = require('./db.json');
 let globalID = 11;
 
 module.exports = {
@@ -6,11 +6,13 @@ module.exports = {
         res.status(200).send(movies)
     },
     deleteMovie: (req, res) => {
+        // console.log(+req.params.id)
         let index = movies.findIndex(elem => elem.id === +req.params.id);
         movies.splice(index, 1);
         res.status(200).send(movies);
     },
     createMovie: (req, res) => {
+        // console.log(req.body)
         const {title, rating, imageURL} = req.body;
 
         // Visual Example of req.body
